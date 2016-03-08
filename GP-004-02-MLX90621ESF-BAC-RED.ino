@@ -5,6 +5,9 @@
 #include <OneWire.h>
 #include "MLX90621.h"
 
+
+//TWBR = ((CPU_FREQ / TWI_FREQ_NUNCHUCK) - 16) / 2;
+
 // For the breakout, you can use any 2 or 3 pins
 // These pins will also work for the 1.8" TFT shield
 #define TFT_CS     9
@@ -29,7 +32,6 @@ OneWire  ds(4);  // mikey was on pin 2
 // Instance of the Mlexis sensor
 MLX90621 sensor; // create an instance of the Sensor class
 
-
 float tmpTemp;
 float DS18B20_temp;
 int myLoop=0;
@@ -41,7 +43,7 @@ void setup(void) {
 
   //Serial.begin(9600);
   Serial.begin(115200);
-  sensor.initialise (2);
+  sensor.initialise (2); // Mikey was 2
   tft.fillScreen(ST7735_BLACK);
   
   // optimized lines
@@ -125,7 +127,7 @@ if (myLoop>15)
     Serial.print(",");
     
     Serial.print("PTAT=");
-    Serial.print("6646"); // GET VALUE MIKEY
+    Serial.print(sensor.get_PTAT()); // GET VALUE MIKEY
     Serial.print(",");
     
     Serial.print("EMISSIVITY=");
@@ -133,6 +135,7 @@ if (myLoop>15)
     Serial.print(",");
     
     Serial.print("V_TH=");
+    //Serial.print(sensor.get_KT1());
     Serial.print("6760"); // GET VALUE MIKEY
     Serial.print(",");
     
@@ -345,5 +348,6 @@ void cellFill( int16_t x, int16_t y, int16_t color)
  
  tft.fillRect(x,y,9,19,color);
 }
+
 
 
