@@ -1,3 +1,13 @@
+/*
+* Adapted by Josh Long (https://github.com/longjos) Oct 2015
+* Based on a https://github.com/robinvanemden/MLX90621_Arduino_Processing
+* Modified by Robert Chapman and Mike Blankenship to work with the GP-001-01 (MLX906XX EVAL Arduino shield) and GP-004-02 (Thermal Imager)
+* Original work by:
+* 2013 by Felix Bonowski
+* Based on a forum post by maxbot: http://forum.arduino.cc/index.php/topic,126244.msg949212.html#msg949212
+* This code is in the public domain.
+*/
+
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
 #include <SPI.h>
@@ -34,6 +44,7 @@ MLX90621 sensor; // create an instance of the Sensor class
 
 float tmpTemp;
 float DS18B20_temp;
+float myFloat[64];
 int myLoop=0;
 int MyX=0;
 
@@ -91,6 +102,10 @@ void loop() {
        
       tmpTemp = (sensor.getTemperature(y+x*4));
       Serial.print(tmpTemp);
+      //myFloat[myLoop] = tmpTemp;
+      //Serial.print(myFloat[myLoop]);
+      //Serial.print(" ");
+      //delay(100);
       tmpTemp = 0;
       Serial.print(",");
 if (myLoop>15)
@@ -265,8 +280,8 @@ void calculate_DS18B20(){
   tft.setTextColor(ST7735_RED);
   tft.setCursor(50, 120);
   tft.print(tmpTemp);
-  tft.print((char)248);
   tft.setTextColor(ST7735_YELLOW);
+  tft.print((char)248);
   tft.print("C");
   
   tft.setTextColor(ST7735_BLUE);
@@ -277,8 +292,8 @@ void calculate_DS18B20(){
   tft.setTextColor(ST7735_RED);
   tft.setCursor(50, 110);
   tft.print(DS18B20_temp);
+   tft.setTextColor(ST7735_YELLOW);
   tft.print((char)248);
-  tft.setTextColor(ST7735_YELLOW);
   tft.print("C");
 }
 
