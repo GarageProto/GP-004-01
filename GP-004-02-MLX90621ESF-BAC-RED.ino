@@ -2,6 +2,7 @@
 * Adapted by Josh Long (https://github.com/longjos) Oct 2015
 * Based on a https://github.com/robinvanemden/MLX90621_Arduino_Processing
 * Modified by Robert Chapman and Mike Blankenship to work with the GP-001-01 (MLX906XX EVAL Arduino shield) and GP-004-02 (Thermal Imager)
+* Verified to work on the Arduino UNO R3 and Leonardo
 * Original work by:
 * 2013 by Felix Bonowski
 * Based on a forum post by maxbot: http://forum.arduino.cc/index.php/topic,126244.msg949212.html#msg949212
